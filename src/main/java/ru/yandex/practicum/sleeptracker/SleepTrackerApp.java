@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class SleepTrackerApp {
@@ -34,7 +35,7 @@ public class SleepTrackerApp {
         return br.lines()
                 .filter(line -> !line.trim().isEmpty())
                 .map(SleepTrackerApp::parseLineToSleepingSession)
-                .filter(session -> session != null)
+                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
 
     }

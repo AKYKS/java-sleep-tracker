@@ -80,7 +80,7 @@ public class SleeplessNightsCountFunction implements SleepAnalysisFunction {
             if (end.isAfter(nightEndToday)) {
                 return start.toLocalDate();
             } else {
-                return start.toLocalDate();
+                return end.toLocalDate();
             }
         }
     }

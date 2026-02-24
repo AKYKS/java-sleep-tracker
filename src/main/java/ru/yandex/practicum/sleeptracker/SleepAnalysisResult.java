@@ -9,6 +9,14 @@ public class SleepAnalysisResult {
         this.result = result;
     }
 
+    public Object getResult() {
+        return result;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     @Override
     public String toString() {
         return description + ": " + result.toString();

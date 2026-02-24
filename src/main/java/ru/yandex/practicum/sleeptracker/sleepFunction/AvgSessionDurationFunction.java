@@ -8,10 +8,10 @@ import java.util.List;
 public class AvgSessionDurationFunction implements SleepAnalysisFunction {
     @Override
     public SleepAnalysisResult apply(List<SleepingSession> sessions) {
-        int avgDuration = (int) sessions.stream()
+        long avgDuration = (long) sessions.stream()
                 .mapToLong(SleepingSession::getDurationInMinutes)
                 .average()
                 .orElse(0);
-        return new SleepAnalysisResult("Средняя продолжительность сессии (мин)", String.format("%S", avgDuration));
+        return new SleepAnalysisResult("Средняя продолжительность сессии (мин)", avgDuration);
     }
 }

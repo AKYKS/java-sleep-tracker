@@ -54,9 +54,8 @@ class SleepTrackerAppTest {
     @Test
     public void testAvgSessionDurationFunctionOnTestFile() {
         AvgSessionDurationFunction avgSessionDurationFunction = new AvgSessionDurationFunction();
-        String result = (avgSessionDurationFunction.apply(sleepingSessions)).toString();
-        int testValue = 345;
-        Assertions.assertEquals("Средняя продолжительность сессии (мин): " + testValue, result.toString());
+        SleepAnalysisResult result = (avgSessionDurationFunction.apply(sleepingSessions));
+        Assertions.assertEquals((long) 345, result.getResult());
     }
 
     @Test
@@ -70,16 +69,15 @@ class SleepTrackerAppTest {
                 LocalDateTime.of(2026, 1, 13, 8, 30), SleepQuality.GOOD));
 
         AvgSessionDurationFunction avgSessionDurationFunction = new AvgSessionDurationFunction();
-        String result = (avgSessionDurationFunction.apply(sleepingSessionsTest)).toString();
-        int testValue = 480;
-        Assertions.assertEquals("Средняя продолжительность сессии (мин): " + testValue, result.toString());
+        SleepAnalysisResult result = (avgSessionDurationFunction.apply(sleepingSessionsTest));
+        Assertions.assertEquals((long) 480, result.getResult());
     }
 
     @Test
     public void testBadQualitySessionsCountFunctionOnTestFile() {
         BadQualitySessionsCountFunction bqsCountFunction = new BadQualitySessionsCountFunction();
-        String result = (bqsCountFunction.apply(sleepingSessions)).toString();
-        Assertions.assertEquals("Количество сессий с плохим качеством сна: 2", result.toString());
+        SleepAnalysisResult result = (bqsCountFunction.apply(sleepingSessions));
+        Assertions.assertEquals((long) 2, result.getResult());
     }
 
     @Test
@@ -93,15 +91,15 @@ class SleepTrackerAppTest {
                 LocalDateTime.of(2026, 1, 13, 8, 30), SleepQuality.GOOD));
 
         BadQualitySessionsCountFunction bqsCountFunction = new BadQualitySessionsCountFunction();
-        String result = (bqsCountFunction.apply(sleepingSessionsTest)).toString();
-        Assertions.assertEquals("Количество сессий с плохим качеством сна: 1", result.toString());
+        SleepAnalysisResult result = (bqsCountFunction.apply(sleepingSessionsTest));
+        Assertions.assertEquals((long) 1, result.getResult());
     }
 
     @Test
     public void testChronotypeAnalysisFunctionOnTestFile() {
         ChronotypeAnalysisFunction chronotypeAnalysisFunction = new ChronotypeAnalysisFunction();
-        String result = (chronotypeAnalysisFunction.apply(sleepingSessions)).toString();
-        Assertions.assertEquals("Хронотип пользователя: Голубь", result.toString());
+        SleepAnalysisResult result = (chronotypeAnalysisFunction.apply(sleepingSessions));
+        Assertions.assertEquals("Голубь", result.getResult().toString());
     }
 
     @Test
@@ -115,8 +113,8 @@ class SleepTrackerAppTest {
                 LocalDateTime.of(2026, 1, 13, 10, 30), SleepQuality.GOOD));
 
         ChronotypeAnalysisFunction chronotypeAnalysisFunction = new ChronotypeAnalysisFunction();
-        String result = (chronotypeAnalysisFunction.apply(sleepingSessionsTest)).toString();
-        Assertions.assertEquals("Хронотип пользователя: Сова", result.toString());
+        SleepAnalysisResult result = (chronotypeAnalysisFunction.apply(sleepingSessionsTest));
+        Assertions.assertEquals("Сова", result.getResult().toString());
 
         List<SleepingSession> sleepingSessionsTest2 = new ArrayList<>();
         sleepingSessionsTest2.add(new SleepingSession(LocalDateTime.of(2026, 1, 10, 22, 30),
@@ -126,15 +124,15 @@ class SleepTrackerAppTest {
         sleepingSessionsTest2.add(new SleepingSession(LocalDateTime.of(2026, 1, 12, 21, 30),
                 LocalDateTime.of(2026, 1, 13, 6, 30), SleepQuality.GOOD));
 
-        result = (chronotypeAnalysisFunction.apply(sleepingSessionsTest2)).toString();
-        Assertions.assertEquals("Хронотип пользователя: Жаворонок", result.toString());
+        result = (chronotypeAnalysisFunction.apply(sleepingSessionsTest2));
+        Assertions.assertEquals("Жаворонок", result.getResult().toString());
     }
 
     @Test
     public void testMaxSessionDurationFunctionOnTestFile() {
         MaxSessionDurationFunction maxSessionDurationFunction = new MaxSessionDurationFunction();
-        String result = (maxSessionDurationFunction.apply(sleepingSessions)).toString();
-        Assertions.assertEquals("Максимальная продолжительность сессии (мин): 500", result.toString());
+        SleepAnalysisResult result = (maxSessionDurationFunction.apply(sleepingSessions));
+        Assertions.assertEquals((long) 500, result.getResult());
     }
 
     @Test
@@ -148,15 +146,15 @@ class SleepTrackerAppTest {
                 LocalDateTime.of(2026, 1, 13, 11, 30), SleepQuality.GOOD));
 
         MaxSessionDurationFunction maxSessionDurationFunction = new MaxSessionDurationFunction();
-        String result = (maxSessionDurationFunction.apply(sleepingSessionsTest)).toString();
-        Assertions.assertEquals("Максимальная продолжительность сессии (мин): 720", result.toString());
+        SleepAnalysisResult result = (maxSessionDurationFunction.apply(sleepingSessionsTest));
+        Assertions.assertEquals((long) 720, result.getResult());
     }
 
     @Test
     public void testMinSessionDurationFunctionOnTestFile() {
         MinSessionDurationFunction minSessionDurationFunction = new MinSessionDurationFunction();
-        String result = (minSessionDurationFunction.apply(sleepingSessions)).toString();
-        Assertions.assertEquals("Минимальная продолжительность сессии (мин): 45", result.toString());
+        SleepAnalysisResult result = (minSessionDurationFunction.apply(sleepingSessions));
+        Assertions.assertEquals((long) 45, result.getResult());
     }
 
     @Test
@@ -170,15 +168,15 @@ class SleepTrackerAppTest {
                 LocalDateTime.of(2026, 1, 13, 11, 30), SleepQuality.GOOD));
 
         MinSessionDurationFunction minSessionDurationFunction = new MinSessionDurationFunction();
-        String result = (minSessionDurationFunction.apply(sleepingSessionsTest)).toString();
-        Assertions.assertEquals("Минимальная продолжительность сессии (мин): 480", result.toString());
+        SleepAnalysisResult result = (minSessionDurationFunction.apply(sleepingSessionsTest));
+        Assertions.assertEquals((long) 480, result.getResult());
     }
 
     @Test
     public void testSleeplessNightsCountFunctionOnTestFile() {
         SleeplessNightsCountFunction sleeplessNightsCountFunction = new SleeplessNightsCountFunction();
-        String result = (sleeplessNightsCountFunction.apply(sleepingSessions)).toString();
-        Assertions.assertEquals("Количество бессонных ночей: 20", result.toString());
+        SleepAnalysisResult result = (sleeplessNightsCountFunction.apply(sleepingSessions));
+        Assertions.assertEquals((long) 20, result.getResult());
     }
 
     @Test
@@ -192,15 +190,15 @@ class SleepTrackerAppTest {
                 LocalDateTime.of(2026, 1, 14, 11, 30), SleepQuality.GOOD));
 
         SleeplessNightsCountFunction sleeplessNightsCountFunction = new SleeplessNightsCountFunction();
-        String result = (sleeplessNightsCountFunction.apply(sleepingSessionsTest)).toString();
-        Assertions.assertEquals("Количество бессонных ночей: 1", result.toString());
+        SleepAnalysisResult result = (sleeplessNightsCountFunction.apply(sleepingSessionsTest));
+        Assertions.assertEquals((long) 1, result.getResult());
     }
 
     @Test
     public void testTotalSessionsCountFunctionOnTestFile() {
         TotalSessionsCountFunction totalSessionsCountFunction = new TotalSessionsCountFunction();
-        String result = (totalSessionsCountFunction.apply(sleepingSessions)).toString();
-        Assertions.assertEquals("Общее количество сессий сна: 13", result.toString());
+        SleepAnalysisResult result = (totalSessionsCountFunction.apply(sleepingSessions));
+        Assertions.assertEquals((long) 13, result.getResult());
     }
 
     @Test
@@ -214,7 +212,7 @@ class SleepTrackerAppTest {
                 LocalDateTime.of(2026, 1, 14, 11, 30), SleepQuality.GOOD));
 
         TotalSessionsCountFunction totalSessionsCountFunction = new TotalSessionsCountFunction();
-        String result = (totalSessionsCountFunction.apply(sleepingSessionsTest)).toString();
-        Assertions.assertEquals("Общее количество сессий сна: 3", result.toString());
+        SleepAnalysisResult result = (totalSessionsCountFunction.apply(sleepingSessionsTest));
+        Assertions.assertEquals((long) 3, result.getResult());
     }
 }
