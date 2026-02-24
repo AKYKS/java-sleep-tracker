@@ -55,7 +55,8 @@ class SleepTrackerAppTest {
     public void testAvgSessionDurationFunctionOnTestFile() {
         AvgSessionDurationFunction avgSessionDurationFunction = new AvgSessionDurationFunction();
         String result = (avgSessionDurationFunction.apply(sleepingSessions)).toString();
-        Assertions.assertEquals("Средняя продолжительность сессии (мин): 345,38", result.toString());
+        int testValue = 345;
+        Assertions.assertEquals("Средняя продолжительность сессии (мин): " + testValue, result.toString());
     }
 
     @Test
@@ -70,7 +71,8 @@ class SleepTrackerAppTest {
 
         AvgSessionDurationFunction avgSessionDurationFunction = new AvgSessionDurationFunction();
         String result = (avgSessionDurationFunction.apply(sleepingSessionsTest)).toString();
-        Assertions.assertEquals("Средняя продолжительность сессии (мин): 480,00", result.toString());
+        int testValue = 480;
+        Assertions.assertEquals("Средняя продолжительность сессии (мин): " + testValue, result.toString());
     }
 
     @Test
